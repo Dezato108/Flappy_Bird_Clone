@@ -14,6 +14,8 @@ public class Bird : MonoBehaviour
     private Vector3 birdRotation;
     private Rigidbody2D myBody;
 
+    public bool hasTheGameStarted, hasBirdDied;
+
     private void Awake()
     {
         myBody = GetComponent<Rigidbody2D>();    
@@ -28,9 +30,29 @@ public class Bird : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        FixBirdRotation();
-        XMoveMent();
-        JumpMovement();        
+        if (hasTheGameStarted && !hasBirdDied)
+        {
+            FixBirdRotation();
+            XMoveMent();
+            JumpMovement();
+        }
+        else
+        {
+            if (myBody.velocity.y < -1 && !hasBirdDied)
+            {
+                myBody.velocity = Vector2.up * jumpForce * .365f;
+            }
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+            {
+                hasTheGameStarted = true;
+                if (!hasBirdDied)
+                {
+                    myBody.velocity = Vector2.up * jumpForce;
+                }
+            }
+        }
+        
+               
     }
 
     void JumpMovement()
@@ -62,5 +84,21 @@ public class Bird : MonoBehaviour
     void XMoveMent()
     {
         transform.position += new Vector3(Time.smoothDeltaTime * xSpeed, 0, 0);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Pipe")
+        {
+            hasBirdDied = true;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            hasBirdDied = true;
+        }
     }
 }
