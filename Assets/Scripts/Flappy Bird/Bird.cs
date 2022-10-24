@@ -9,6 +9,8 @@ public class Bird : MonoBehaviour
 
     [SerializeField] float rotationUp, rotationDown;
 
+    [SerializeField] float xSpeed;
+
     private Vector3 birdRotation;
     private Rigidbody2D myBody;
 
@@ -20,12 +22,14 @@ public class Bird : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
     }
 
     // Update is called once per frame
     void Update()
     {
         FixBirdRotation();
+        XMoveMent();
         JumpMovement();        
     }
 
@@ -53,5 +57,10 @@ public class Bird : MonoBehaviour
         birdRotation = new Vector3(0, 0, Mathf.Clamp(birdRotation.z + degreesToAdd, -60, 30));
 
         transform.eulerAngles = birdRotation;
+    }
+
+    void XMoveMent()
+    {
+        transform.position += new Vector3(Time.smoothDeltaTime * xSpeed, 0, 0);
     }
 }
