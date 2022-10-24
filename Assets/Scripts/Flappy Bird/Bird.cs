@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class Bird : MonoBehaviour
 {
-    private Rigidbody2D myBody;
+    [Header("Bird Attributes")]
+    [SerializeField] float jumpForce;
 
-    public float jumpForce;
+    [SerializeField] float rotationUp, rotationDown;
+
+    private Vector3 birdRotation;
+    private Rigidbody2D myBody;
 
     private void Awake()
     {
@@ -21,6 +25,7 @@ public class Bird : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        FixBirdRotation();
         JumpMovement();        
     }
 
@@ -30,5 +35,23 @@ public class Bird : MonoBehaviour
         {
             myBody.velocity = Vector2.up * jumpForce;
         }
+    }
+
+    void FixBirdRotation()
+    {
+        float degreesToAdd = 0;
+        if (myBody.velocity.y <= 0)
+        {
+            degreesToAdd = rotationDown;
+        }
+        
+        if (myBody.velocity.y > 0)
+        {
+            degreesToAdd = rotationUp;
+        }
+
+        birdRotation = new Vector3(0, 0, Mathf.Clamp(birdRotation.z + degreesToAdd, -60, 30));
+
+        transform.eulerAngles = birdRotation;
     }
 }
