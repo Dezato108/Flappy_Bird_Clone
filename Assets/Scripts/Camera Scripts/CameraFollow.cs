@@ -10,10 +10,10 @@ public class CameraFollow : MonoBehaviour
 
     private void Awake()
     {
-        bird = FindObjectOfType<Bird>().transform;
-
+        //bird = FindObjectOfType<Bird>().transform;
+ 
         //below is another way to find gameobject
-        //bird = GameObject.Find("Flappy Bird").transform;
+        bird = GameObject.Find("Flappy Bird").transform;
     }
     // Start is called before the first frame update
     void Start()

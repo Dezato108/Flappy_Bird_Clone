@@ -16,9 +16,12 @@ public class Bird : MonoBehaviour
 
     public bool hasTheGameStarted, hasBirdDied;
 
+    private Animator anim;
+
     private void Awake()
     {
-        myBody = GetComponent<Rigidbody2D>();    
+        myBody = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     // Start is called before the first frame update
@@ -50,6 +53,11 @@ public class Bird : MonoBehaviour
                     myBody.velocity = Vector2.up * jumpForce;
                 }
             }
+        }
+
+        if (hasBirdDied)
+        {
+            anim.speed = 0;
         }
         
                
