@@ -18,6 +18,10 @@ public class Bird : MonoBehaviour
 
     private Animator anim;
 
+    private int score;
+
+    
+
     private void Awake()
     {
         myBody = GetComponent<Rigidbody2D>();
@@ -99,6 +103,11 @@ public class Bird : MonoBehaviour
         if (collision.tag == "Pipe")
         {
             hasBirdDied = true;
+        }
+        if (collision.tag == "PipeScore")
+        {
+            score++;
+            PlayerPrefs.SetInt("Score", score);
         }
     }
 

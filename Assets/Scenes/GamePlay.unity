@@ -1507,8 +1507,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b41ee6f5b63087458cac2225779b971, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreText: {fileID: 32877008}
+  scoreBoardText: {fileID: 1064269637}
+  highScoreBoardText: {fileID: 224210875}
   getReady: {fileID: 1211201878}
   scoreBoardPanel: {fileID: 2142297653}
+  silverMedal: {fileID: 1503847272}
+  goldMedal: {fileID: 1159540632}
 --- !u!4 &1638723766
 Transform:
   m_ObjectHideFlags: 0
