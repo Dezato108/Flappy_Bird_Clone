@@ -139,9 +139,9 @@ Rigidbody2D:
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  m_SleepingMode: 2
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!114 &87745370898303791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,3 +160,6 @@ MonoBehaviour:
   xSpeed: 1
   hasTheGameStarted: 0
   hasBirdDied: 0
+  deathClip: {fileID: 8300000, guid: fe4250c182d35324b8570640076c423d, type: 3}
+  jumpClip: {fileID: 8300000, guid: ba2fc418c41bb9547a22c2908432d3bf, type: 3}
+  scoreClip: {fileID: 8300000, guid: 6e07426d69e17e54c86f5b9436253f92, type: 3}

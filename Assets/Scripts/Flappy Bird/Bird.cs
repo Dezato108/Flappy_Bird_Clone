@@ -14,11 +14,13 @@ public class Bird : MonoBehaviour
     private Vector3 birdRotation;
     private Rigidbody2D myBody;
 
-    public bool hasTheGameStarted, hasBirdDied;
+    public bool hasTheGameStarted, hasBirdDied, deathSoundPlayed;
 
     private Animator anim;
 
     private int score;
+
+    [SerializeField] AudioClip deathClip, flyClip, scoreClip;
 
     
 
@@ -31,7 +33,7 @@ public class Bird : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        deathSoundPlayed = false;
     }
 
     // Update is called once per frame
@@ -62,9 +64,15 @@ public class Bird : MonoBehaviour
         if (hasBirdDied)
         {
             anim.speed = 0;
+            if (!deathSoundPlayed)
+            {
+                AudioSource.PlayClipAtPoint(deathClip, transform.position);
+                deathSoundPlayed = true;
+            }
+            
         }
-        
-               
+
+
     }
 
     void JumpMovement()
@@ -72,6 +80,7 @@ public class Bird : MonoBehaviour
         if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
         {
             myBody.velocity = Vector2.up * jumpForce;
+            AudioSource.PlayClipAtPoint(flyClip, transform.position);
         }
     }
 
@@ -108,6 +117,7 @@ public class Bird : MonoBehaviour
         {
             score++;
             PlayerPrefs.SetInt("Score", score);
+            AudioSource.PlayClipAtPoint(scoreClip, transform.position);
         }
     }
 
