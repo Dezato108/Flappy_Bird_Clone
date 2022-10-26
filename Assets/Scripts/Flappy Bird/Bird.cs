@@ -47,18 +47,7 @@ public class Bird : MonoBehaviour
         }
         else
         {
-            if (myBody.velocity.y < -1 && !hasBirdDied)
-            {
-                myBody.velocity = Vector2.up * jumpForce * .365f;
-            }
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
-            {
-                hasTheGameStarted = true;
-                if (!hasBirdDied)
-                {
-                    myBody.velocity = Vector2.up * jumpForce;
-                }
-            }
+            TapToMakeTheBirdJump();
         }
 
         if (hasBirdDied)
@@ -73,6 +62,22 @@ public class Bird : MonoBehaviour
         }
 
 
+    }
+
+    private void TapToMakeTheBirdJump()
+    {
+        if (myBody.velocity.y < -1 && !hasBirdDied)
+        {
+            myBody.velocity = Vector2.up * jumpForce * .365f;
+        }
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+        {
+            hasTheGameStarted = true;
+            if (!hasBirdDied)
+            {
+                myBody.velocity = Vector2.up * jumpForce;
+            }
+        }
     }
 
     void JumpMovement()
@@ -116,6 +121,9 @@ public class Bird : MonoBehaviour
         if (collision.tag == "PipeScore")
         {
             score++;
+
+            SpeedUp();                      
+
             PlayerPrefs.SetInt("Score", score);
             AudioSource.PlayClipAtPoint(scoreClip, transform.position);
         }
@@ -126,6 +134,14 @@ public class Bird : MonoBehaviour
         if (collision.gameObject.tag == "Ground")
         {
             hasBirdDied = true;
+        }
+    }
+
+    void SpeedUp()
+    {
+        if (score % 5  == 0 && score > 0)
+        {
+            xSpeed += 0.1f;
         }
     }
 }
